@@ -3,10 +3,6 @@ syntax = "proto3";
 option csharp_namespace = "LucasNotes.UserService.Protos";
 package UserManager;
 
-service UserManager{
-	rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdReply);
-}
-
 message GetUserByIdRequest {
 	int32 Id = 1;
 }
@@ -19,6 +15,11 @@ message UserDto {
 	string Email = 5;
 }
 
-message GetUserByIdReply {
+message GetUsersReply {
 	repeated UserDto Users = 1;
+}
+
+service UserManager{
+	rpc GetUserById (GetUserByIdRequest) returns (UserDto);
+	rpc GetUsers (GetUserByIdRequest) returns (GetUsersReply);
 }

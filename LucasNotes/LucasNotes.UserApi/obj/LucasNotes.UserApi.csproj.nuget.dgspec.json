@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj": {}
+    "E:\\Repository\\msa\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj": {
+    "E:\\Repository\\msa\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj",
+        "projectUniqueName": "E:\\Repository\\msa\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj",
         "projectName": "LucasNotes.UserApi",
-        "projectPath": "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj",
-        "packagesPath": "C:\\Users\\lucaslu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserApi\\obj\\",
+        "projectPath": "E:\\Repository\\msa\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj",
+        "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
+        "outputPath": "E:\\Repository\\msa\\LucasNotes\\LucasNotes.UserApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\lucaslu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lucas\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -25,13 +25,8 @@
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "E:\\GitRepository\\efcore\\src": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/azure-public/vside/_packaging/vs-buildservices/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -82,8 +77,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -95,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

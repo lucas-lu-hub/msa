@@ -27,17 +27,19 @@ namespace LucasNotes.UserService.Protos {
             "ChhQcm90b3MvVXNlck1hbmFnZXIucHJvdG8SC1VzZXJNYW5hZ2VyIiAKEkdl",
             "dFVzZXJCeUlkUmVxdWVzdBIKCgJJZBgBIAEoBSJcCgdVc2VyRHRvEg4KBlVz",
             "ZXJJZBgBIAEoBRIQCghVc2VyTmFtZRgCIAEoCRIQCghQYXNzd29yZBgDIAEo",
-            "CRIOCgZHZW5kZXIYBCABKAUSDQoFRW1haWwYBSABKAkiNwoQR2V0VXNlckJ5",
-            "SWRSZXBseRIjCgVVc2VycxgBIAMoCzIULlVzZXJNYW5hZ2VyLlVzZXJEdG8y",
-            "XAoLVXNlck1hbmFnZXISTQoLR2V0VXNlckJ5SWQSHy5Vc2VyTWFuYWdlci5H",
-            "ZXRVc2VyQnlJZFJlcXVlc3QaHS5Vc2VyTWFuYWdlci5HZXRVc2VyQnlJZFJl",
-            "cGx5QiCqAh1MdWNhc05vdGVzLlVzZXJTZXJ2aWNlLlByb3Rvc2IGcHJvdG8z"));
+            "CRIOCgZHZW5kZXIYBCABKAUSDQoFRW1haWwYBSABKAkiNAoNR2V0VXNlcnNS",
+            "ZXBseRIjCgVVc2VycxgBIAMoCzIULlVzZXJNYW5hZ2VyLlVzZXJEdG8ynAEK",
+            "C1VzZXJNYW5hZ2VyEkQKC0dldFVzZXJCeUlkEh8uVXNlck1hbmFnZXIuR2V0",
+            "VXNlckJ5SWRSZXF1ZXN0GhQuVXNlck1hbmFnZXIuVXNlckR0bxJHCghHZXRV",
+            "c2VycxIfLlVzZXJNYW5hZ2VyLkdldFVzZXJCeUlkUmVxdWVzdBoaLlVzZXJN",
+            "YW5hZ2VyLkdldFVzZXJzUmVwbHlCIKoCHUx1Y2FzTm90ZXMuVXNlclNlcnZp",
+            "Y2UuUHJvdG9zYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::LucasNotes.UserService.Protos.GetUserByIdRequest), global::LucasNotes.UserService.Protos.GetUserByIdRequest.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::LucasNotes.UserService.Protos.UserDto), global::LucasNotes.UserService.Protos.UserDto.Parser, new[]{ "UserId", "UserName", "Password", "Gender", "Email" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::LucasNotes.UserService.Protos.GetUserByIdReply), global::LucasNotes.UserService.Protos.GetUserByIdReply.Parser, new[]{ "Users" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::LucasNotes.UserService.Protos.GetUsersReply), global::LucasNotes.UserService.Protos.GetUsersReply.Parser, new[]{ "Users" }, null, null, null, null)
           }));
     }
     #endregion
@@ -532,15 +534,15 @@ namespace LucasNotes.UserService.Protos {
 
   }
 
-  public sealed partial class GetUserByIdReply : pb::IMessage<GetUserByIdReply>
+  public sealed partial class GetUsersReply : pb::IMessage<GetUsersReply>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<GetUserByIdReply> _parser = new pb::MessageParser<GetUserByIdReply>(() => new GetUserByIdReply());
+    private static readonly pb::MessageParser<GetUsersReply> _parser = new pb::MessageParser<GetUsersReply>(() => new GetUsersReply());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<GetUserByIdReply> Parser { get { return _parser; } }
+    public static pb::MessageParser<GetUsersReply> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -553,21 +555,21 @@ namespace LucasNotes.UserService.Protos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetUserByIdReply() {
+    public GetUsersReply() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetUserByIdReply(GetUserByIdReply other) : this() {
+    public GetUsersReply(GetUsersReply other) : this() {
       users_ = other.users_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetUserByIdReply Clone() {
-      return new GetUserByIdReply(this);
+    public GetUsersReply Clone() {
+      return new GetUsersReply(this);
     }
 
     /// <summary>Field number for the "Users" field.</summary>
@@ -582,11 +584,11 @@ namespace LucasNotes.UserService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as GetUserByIdReply);
+      return Equals(other as GetUsersReply);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GetUserByIdReply other) {
+    public bool Equals(GetUsersReply other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -645,7 +647,7 @@ namespace LucasNotes.UserService.Protos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GetUserByIdReply other) {
+    public void MergeFrom(GetUsersReply other) {
       if (other == null) {
         return;
       }
