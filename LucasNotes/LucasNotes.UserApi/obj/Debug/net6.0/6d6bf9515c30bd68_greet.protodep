@@ -1,0 +1,2 @@
+obj\Debug\net6.0\UserService\Protos/Greet.cs \
+obj\Debug\net6.0\UserService\Protos/GreetGrpc.cs: UserService/Protos/greet.proto

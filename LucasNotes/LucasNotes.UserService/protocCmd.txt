@@ -1,0 +1,1 @@
+﻿protoc UserManager.proto --csharp_out=.\LucasNotes.UserService\Services\ --proto_path=.\LucasNotes.UserService\Protos\
