@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "LucasNotes.UserService";
+option csharp_namespace = "LucasNotes.UserService.Protos";
 
 package greet;
 

@@ -9,12 +9,7 @@ service UserManager{
 	rpc GetUserById (GetUserByIdRequest) returns (UserDto);
 	rpc GetUsers (google.protobuf.Empty) returns (GetUsersReply);
 	rpc CreateUser (UserDto) returns (google.protobuf.Empty);
-	rpc CheckUserPwd (CheckUserPwdRequest) returns (UserDto);
-}
 
-message CheckUserPwdRequest {
-	string Name = 1;
-	string Pwd = 2;
 }
 
 message GetUserByIdRequest {

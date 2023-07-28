@@ -1,7 +1,9 @@
 ﻿using Grpc.Net.Client;
 using LucasNotes.UserApi.Controllers.Dto;
 using LucasNotes.UserService;
+using LucasNotes.UserService.Protos;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LucasNotes.UserApi.Controllers
@@ -12,36 +14,38 @@ namespace LucasNotes.UserApi.Controllers
     [Authorize]
     public class UserController : Controller
     {
+        private const string _userServiceUrl = "https://localhost:7029";
+
         [HttpPost]
-        public void Add(UserDto input)
+        public async Task Add(UserDto input)
         {
-            // createUser
-        }
-
-        [HttpGet]
-        public UserDto GetUserById(int id)
-        {
-            return new UserDto();
-        }
-
-        [HttpGet]
-        public List<UserDto> GetUsers()
-        {
-            return new List<UserDto> { new UserDto() };
-        }
-
-        [HttpGet]
-        public async Task<string> TestGrpc()
-        {
-            var url = "https://localhost:7029";
-            using (var channel = GrpcChannel.ForAddress(url))
+            using (var channel = GrpcChannel.ForAddress(_userServiceUrl))
             {
-                var client = new Greeter.GreeterClient(channel);
-                var reply = await client.SayHelloAsync(new HelloRequest
+                var client = new UserManager.UserManagerClient(channel);
+                await client.CreateUserAsync(input);
+            }
+        }
+
+        [HttpGet]
+        public async Task<UserDto> GetUserById(int id)
+        {
+            using (var channel = GrpcChannel.ForAddress(_userServiceUrl))
+            {
+                var client = new UserManager.UserManagerClient(channel);
+                return await client.GetUserByIdAsync(new GetUserByIdRequest
                 {
-                    Name = "lucasUser"
+                    Id = id
                 });
-                return reply.Message;
+            }
+        }
+
+        [HttpGet]
+        public async Task<List<UserDto>> GetUsers()
+        {
+            using (var channel = GrpcChannel.ForAddress(_userServiceUrl))
+            {
+                var client = new UserManager.UserManagerClient(channel);
+                return (await client.GetUsersAsync(new Google.Protobuf.WellKnownTypes.Empty())).Users.ToList();
             }
         }
     }
