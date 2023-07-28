@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NvSDDQ1P0SelyBx5MRP4/MLT6SMWFsLpo9OZu2oXiEDsqJ1NFGIcHa/+LMYGsSaV55vD2sY/JfsQYddUyI5Xmw==",
+  "dgSpecHash": "VWcoUuaT+1nVuWtxBmMQuIyiJMVJkJzq61VQ8yu8fQ2SdxmTXz7+k7o/CcsyB2pxLdxUSERTvz7sy/refaAykg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj",
+  "projectFilePath": "E:\\New folder\\msa\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lucaslu\\.nuget\\packages\\google.protobuf\\3.24.0-rc2\\google.protobuf.3.24.0-rc2.nupkg.sha512",
     "C:\\Users\\lucaslu\\.nuget\\packages\\grpc.core.api\\2.55.0\\grpc.core.api.2.55.0.nupkg.sha512",

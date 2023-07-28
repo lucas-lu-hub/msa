@@ -1,3 +1,4 @@
+using LucasNotes.UserService.Repositories;
 using LucasNotes.UserService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
+builder.Services.AddSingleton<DbHelper>();
 
 var app = builder.Build();
 

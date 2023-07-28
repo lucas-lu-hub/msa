@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj": {}
+    "E:\\New folder\\msa\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj": {
+    "E:\\New folder\\msa\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj",
+        "projectUniqueName": "E:\\New folder\\msa\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj",
         "projectName": "LucasNotes.UserApi",
-        "projectPath": "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj",
+        "projectPath": "E:\\New folder\\msa\\LucasNotes\\LucasNotes.UserApi\\LucasNotes.UserApi.csproj",
         "packagesPath": "C:\\Users\\lucaslu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserApi\\obj\\",
+        "outputPath": "E:\\New folder\\msa\\LucasNotes\\LucasNotes.UserApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

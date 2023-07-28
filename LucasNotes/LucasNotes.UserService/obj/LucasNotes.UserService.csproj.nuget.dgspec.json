@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserService\\LucasNotes.UserService.csproj": {}
+    "E:\\New folder\\msa\\LucasNotes\\LucasNotes.UserService\\LucasNotes.UserService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserService\\LucasNotes.UserService.csproj": {
+    "E:\\New folder\\msa\\LucasNotes\\LucasNotes.UserService\\LucasNotes.UserService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserService\\LucasNotes.UserService.csproj",
+        "projectUniqueName": "E:\\New folder\\msa\\LucasNotes\\LucasNotes.UserService\\LucasNotes.UserService.csproj",
         "projectName": "LucasNotes.UserService",
-        "projectPath": "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserService\\LucasNotes.UserService.csproj",
+        "projectPath": "E:\\New folder\\msa\\LucasNotes\\LucasNotes.UserService\\LucasNotes.UserService.csproj",
         "packagesPath": "C:\\Users\\lucaslu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.UserService\\obj\\",
+        "outputPath": "E:\\New folder\\msa\\LucasNotes\\LucasNotes.UserService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -56,6 +56,10 @@
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.17.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
             }
           },
           "imports": [

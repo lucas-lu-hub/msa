@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ztGov64EGhlvJO2qdxAt15HlM/FjcW87iXc6dNQGiUIZpeFDwnwNVKocbpaYr7iYLmuSaY2QCNfvYS5RA1uemw==",
+  "dgSpecHash": "AbxUjomDAQmaV1yx75jvrrvKW3X0L8xZs6N1DIE9UdJx07+pybj3ez3ljJByAgSwdb+dM8SIaf06OTBKUIoFRw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lucaslu\\source\\repos\\LucasNotes\\LucasNotes.Identity\\LucasNotes.Identity.csproj",
+  "projectFilePath": "E:\\New folder\\msa\\LucasNotes\\LucasNotes.Identity\\LucasNotes.Identity.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lucaslu\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.20\\microsoft.aspnetcore.authentication.jwtbearer.6.0.20.nupkg.sha512",
     "C:\\Users\\lucaslu\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

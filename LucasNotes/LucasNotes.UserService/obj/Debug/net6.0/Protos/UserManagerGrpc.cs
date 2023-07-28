@@ -48,15 +48,25 @@ namespace LucasNotes.UserService.Protos {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::LucasNotes.UserService.Protos.GetUserByIdRequest> __Marshaller_UserManager_GetUserByIdRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::LucasNotes.UserService.Protos.GetUserByIdRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::LucasNotes.UserService.Protos.GetUserByIdReply> __Marshaller_UserManager_GetUserByIdReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::LucasNotes.UserService.Protos.GetUserByIdReply.Parser));
+    static readonly grpc::Marshaller<global::LucasNotes.UserService.Protos.UserDto> __Marshaller_UserManager_UserDto = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::LucasNotes.UserService.Protos.UserDto.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::LucasNotes.UserService.Protos.GetUsersReply> __Marshaller_UserManager_GetUsersReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::LucasNotes.UserService.Protos.GetUsersReply.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::LucasNotes.UserService.Protos.GetUserByIdRequest, global::LucasNotes.UserService.Protos.GetUserByIdReply> __Method_GetUserById = new grpc::Method<global::LucasNotes.UserService.Protos.GetUserByIdRequest, global::LucasNotes.UserService.Protos.GetUserByIdReply>(
+    static readonly grpc::Method<global::LucasNotes.UserService.Protos.GetUserByIdRequest, global::LucasNotes.UserService.Protos.UserDto> __Method_GetUserById = new grpc::Method<global::LucasNotes.UserService.Protos.GetUserByIdRequest, global::LucasNotes.UserService.Protos.UserDto>(
         grpc::MethodType.Unary,
         __ServiceName,
         "GetUserById",
         __Marshaller_UserManager_GetUserByIdRequest,
-        __Marshaller_UserManager_GetUserByIdReply);
+        __Marshaller_UserManager_UserDto);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::LucasNotes.UserService.Protos.GetUserByIdRequest, global::LucasNotes.UserService.Protos.GetUsersReply> __Method_GetUsers = new grpc::Method<global::LucasNotes.UserService.Protos.GetUserByIdRequest, global::LucasNotes.UserService.Protos.GetUsersReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetUsers",
+        __Marshaller_UserManager_GetUserByIdRequest,
+        __Marshaller_UserManager_GetUsersReply);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -69,7 +79,13 @@ namespace LucasNotes.UserService.Protos {
     public abstract partial class UserManagerBase
     {
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::LucasNotes.UserService.Protos.GetUserByIdReply> GetUserById(global::LucasNotes.UserService.Protos.GetUserByIdRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::LucasNotes.UserService.Protos.UserDto> GetUserById(global::LucasNotes.UserService.Protos.GetUserByIdRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::LucasNotes.UserService.Protos.GetUsersReply> GetUsers(global::LucasNotes.UserService.Protos.GetUserByIdRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -82,7 +98,8 @@ namespace LucasNotes.UserService.Protos {
     public static grpc::ServerServiceDefinition BindService(UserManagerBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_GetUserById, serviceImpl.GetUserById).Build();
+          .AddMethod(__Method_GetUserById, serviceImpl.GetUserById)
+          .AddMethod(__Method_GetUsers, serviceImpl.GetUsers).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -92,7 +109,8 @@ namespace LucasNotes.UserService.Protos {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static void BindService(grpc::ServiceBinderBase serviceBinder, UserManagerBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_GetUserById, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::LucasNotes.UserService.Protos.GetUserByIdRequest, global::LucasNotes.UserService.Protos.GetUserByIdReply>(serviceImpl.GetUserById));
+      serviceBinder.AddMethod(__Method_GetUserById, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::LucasNotes.UserService.Protos.GetUserByIdRequest, global::LucasNotes.UserService.Protos.UserDto>(serviceImpl.GetUserById));
+      serviceBinder.AddMethod(__Method_GetUsers, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::LucasNotes.UserService.Protos.GetUserByIdRequest, global::LucasNotes.UserService.Protos.GetUsersReply>(serviceImpl.GetUsers));
     }
 
   }
