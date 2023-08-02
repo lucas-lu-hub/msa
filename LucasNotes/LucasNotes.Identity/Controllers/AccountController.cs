@@ -1,4 +1,6 @@
-﻿using Grpc.Net.Client;
+﻿using CommonLib.Consts;
+using CommonLib.Interface;
+using Grpc.Net.Client;
 using LucasNotes.Identity.Controllers.Dto;
 using LucasNotes.UserService.Protos;
 using Microsoft.AspNetCore.Identity;
@@ -17,12 +19,15 @@ namespace LucasNotes.Identity.Controllers
     public class AccountController : Controller
     {
 
-        private const string _userServiceUrl = "https://localhost:7029";
+        //private const string _userServiceUrl = "https://localhost:7029";
         private readonly IConfiguration _configuration;
+        private readonly IConsulService _consulService;
 
-        public AccountController(IConfiguration configuration)
+        public AccountController(IConfiguration configuration,
+            IConsulService consulService)
         {
             _configuration = configuration;
+            _consulService = consulService;
         }
 
         [HttpPost]
@@ -31,7 +36,7 @@ namespace LucasNotes.Identity.Controllers
             // 验证账号密码
             var user = await CheckUserAsync(input.UserName, input.Password);
 
-            if (user == null)
+            if (user?.UserId < 0)
             {
                 return null;
             }
@@ -64,7 +69,8 @@ namespace LucasNotes.Identity.Controllers
 
         private async Task<UserDto> CheckUserAsync(string name, string pwd)
         {
-            using (var channel = GrpcChannel.ForAddress(_userServiceUrl))
+            var url = await _consulService.GetUrlFromServiceNameAsync(ServiceNames.UserService);
+            using (var channel = GrpcChannel.ForAddress(url))
             {
                 var client = new UserManager.UserManagerClient(channel);
                 return await client.CheckUserPwdAsync(new CheckUserPwdRequest

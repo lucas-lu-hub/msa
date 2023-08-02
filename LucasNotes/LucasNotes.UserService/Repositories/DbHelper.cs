@@ -9,7 +9,11 @@ namespace LucasNotes.UserService.Repositories
         private readonly string connectionString;
         public DbHelper(IConfiguration configuration)
         {
-            connectionString = configuration["ConnectionStrings:UserDatabase"];
+            //connectionString = configuration["ConnectionStrings:UserDatabase"];
+            var ip = configuration["dbAddress"];
+            var pwd = configuration["dbPwd"];
+
+            connectionString = $"Data Source={ip};database=LucasNotes.UserDb;uid=sa;pwd={pwd};";
         }
 
         public async Task<List<T>> Query<T>(string sql, SqlParameter[] paramArray = null) where T : new()
@@ -40,7 +44,7 @@ namespace LucasNotes.UserService.Repositories
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception($"Method:GetDataSet, DateTime:{DateTime.Now}");
+                        throw new Exception($"Method:GetDataSet, DateTime:{DateTime.Now}, ConnectString:{connectionString},sql:{sql}"); ;
                     }
                     finally
                     {

@@ -13,10 +13,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Protos\HealthCheck.proto" />
+    <None Remove="Protos\protobuf.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Remove="Protos\protobuf.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
   </ItemGroup>
 
 </Project>

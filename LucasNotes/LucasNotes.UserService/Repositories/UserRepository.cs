@@ -1,4 +1,5 @@
-﻿using LucasNotes.UserService.Protos;
+﻿using CommonLib;
+using LucasNotes.UserService.Protos;
 using LucasNotes.UserService.Repositories.Interfaces;
 using System.Data;
 using System.Data.SqlClient;
@@ -22,7 +23,7 @@ namespace LucasNotes.UserService.Repositories
                       "[Name] AS UserName," +
                       "[Pwd] AS Password," +
                       "[Email]," +
-                      "[Gender]" +
+                      "[Gender] " +
                       "FROM [dbo].[User] ";
             return await _dbHelper.Query<UserDto>(sql);
         }
@@ -34,12 +35,15 @@ namespace LucasNotes.UserService.Repositories
                       "[Name] AS UserName," +
                       "[Pwd] AS Password," +
                       "[Email]," +
-                      "[Gender]" +
+                      "[Gender] " +
                       "FROM [dbo].[User] " +
                       "WHERE Id = @id";
             var paras = new SqlParameter[] { new SqlParameter("@id", id) };
             var result = await _dbHelper.Query<UserDto>(sql, paras);
-            return result.FirstOrDefault();
+            return result.FirstOrDefault() ?? new UserDto
+            {
+                UserId = -1
+            };
         } 
 
         public async Task<bool> CreateUserAsync(UserDto user)
@@ -63,12 +67,12 @@ namespace LucasNotes.UserService.Repositories
 
         public async Task<UserDto> CheckPwdAsync(string name, string pwd)
         {
-            var sql = "SELECT 1 " +
-                      "[Id] AS UserId," +
-                      "[Name] AS UserName," +
-                      "[Pwd] AS Password," +
+            var sql = "SELECT " +
+                      "[Id] AS UserId, " +
+                      "[Name] AS UserName, " +
+                      "[Pwd] AS [Password], " +
                       "[Email]," +
-                      "[Gender]" +
+                      "[Gender] " +
                       "FROM [dbo].[User] " +
                       "WHERE [Name] = @Name AND [Pwd] = @Pwd";
             var parameters = new SqlParameter[]
@@ -77,7 +81,10 @@ namespace LucasNotes.UserService.Repositories
                 new SqlParameter("@Pwd", pwd),
             };
             var result = await _dbHelper.Query<UserDto>(sql, parameters);
-            return result.FirstOrDefault();
+            return result.FirstOrDefault() ?? new UserDto
+            {
+                UserId = -1
+            };
         }
     }
 }

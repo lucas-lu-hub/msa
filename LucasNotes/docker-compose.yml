@@ -1,0 +1,98 @@
+version: '3'
+services:
+
+  consul:
+    image: "consul:1.15"
+    container_name: "consul"
+    ports:
+     - "8500:8500"
+
+  sqlserver:
+    build: 
+     context: "./Database/"
+     dockerfile: "./UserDockerfile"
+    image: "mysqlserver"
+    container_name: "sqlserver"
+    ports:
+     - "1600:1433"
+    #environment:
+    # - "ACCEPT_EULA=Y"
+    # - "SA_PASSWORD=xA123456"
+
+  userservice:
+    build: 
+     context: "."
+     dockerfile: "./LucasNotes.UserService/Dockerfile"
+    image: "myuserserivce"
+    container_name: "userservice"
+    ports:
+     - "7000:80"
+    depends_on:
+     - "consul"
+     - "sqlserver"
+    environment:
+     - "ip=userservice"
+     - "port=80"
+     - "dbAddress=sqlserver"
+     - "dbPwd=xA123456"
+     - "ConsulAddress=http://consul:8500"
+
+  identity1:
+    build: 
+     context: "."
+     dockerfile: "./LucasNotes.Identity/Dockerfile"
+    image: "myidentity"
+    container_name: "identity1"
+    ports:
+     - "5000:80"
+    depends_on:
+     - "consul"
+     - "userservice"
+    environment:
+     - "ip=identity1"
+     - "port=80"
+     - "ConsulAddress=http://consul:8500"
+
+  identity2:
+    image: "myidentity"
+    container_name: "identity2"
+    ports:
+     - "5001:80"
+    depends_on:
+     - "consul"
+     - "userservice"
+     - "identity1"
+    environment:
+     - "ip=identity2"
+     - "port=80"
+     - "ConsulAddress=http://consul:8500"
+
+  identity3:
+    image: "myidentity"
+    container_name: "identity3"
+    ports:
+     - "5003:80"
+    depends_on:
+     - "consul"
+     - "userservice"
+     - "identity1"
+    environment:
+     - "ip=identity3"
+     - "port=80"
+     - "ConsulAddress=http://consul:8500"
+
+  userapi:
+    build: 
+     context: "."
+     dockerfile: "./LucasNotes.UserApi/Dockerfile"
+    image: "myuserapi"
+    container_name: "userapi"
+    ports:
+     - "6000:80"
+    depends_on:
+     - "consul"
+     - "userservice"
+    environment:
+     - "ip=userapi"
+     - "port=80"
+     - "ConsulAddress=http://consul:8500"
