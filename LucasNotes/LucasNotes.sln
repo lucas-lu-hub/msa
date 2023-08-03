@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LucasNotes.UserService", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLib", "CommonLib\CommonLib.csproj", "{EE5A5756-E8E2-4CD7-A843-3035654546B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LucasNotes.Gateway", "LucasNotes.Gateway\LucasNotes.Gateway.csproj", "{3A2A2F13-57EF-401A-AF16-A4BB814DBA28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{EE5A5756-E8E2-4CD7-A843-3035654546B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE5A5756-E8E2-4CD7-A843-3035654546B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE5A5756-E8E2-4CD7-A843-3035654546B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A2A2F13-57EF-401A-AF16-A4BB814DBA28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2A2F13-57EF-401A-AF16-A4BB814DBA28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A2A2F13-57EF-401A-AF16-A4BB814DBA28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A2A2F13-57EF-401A-AF16-A4BB814DBA28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -42,23 +42,23 @@ builder.Services.AddSwaggerGen(opt =>
     });
 });
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidIssuer = config["Jwt:Issuer"],
-        ValidateAudience = true,
-        ValidAudience = config["Jwt:Audience"],
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:SecretKey"])),
-        ValidateLifetime = true,
-        RequireExpirationTime = true,
-    };
-});
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+//}).AddJwtBearer(options =>
+//{
+//    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+//    {
+//        ValidateIssuer = true,
+//        ValidIssuer = config["Jwt:Issuer"],
+//        ValidateAudience = true,
+//        ValidAudience = config["Jwt:Audience"],
+//        ValidateIssuerSigningKey = true,
+//        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:SecretKey"])),
+//        ValidateLifetime = true,
+//        RequireExpirationTime = true,
+//    };
+//});
 
 var app = builder.Build();
 
@@ -70,7 +70,7 @@ app.UseSwaggerUI();
 app.UseConul(config);
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
+//app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
