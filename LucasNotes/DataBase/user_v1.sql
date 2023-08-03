@@ -1,4 +1,3 @@
-DROP DATABASE  IF EXISTS [LucasNotes.UserDb]
 
 CREATE DATABASE [LucasNotes.UserDb]
 GO

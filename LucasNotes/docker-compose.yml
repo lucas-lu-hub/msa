@@ -1,4 +1,4 @@
-version: '3'
+﻿version: '3'
 services:
 
   consul:
@@ -15,9 +15,9 @@ services:
     container_name: "sqlserver"
     ports:
      - "1600:1433"
-    #environment:
-    # - "ACCEPT_EULA=Y"
-    # - "SA_PASSWORD=xA123456"
+    environment:
+     - "ACCEPT_EULA=Y"
+     - "SA_PASSWORD=xA123456"
 
   userservice:
     build: 
