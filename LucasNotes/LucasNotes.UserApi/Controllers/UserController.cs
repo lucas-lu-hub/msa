@@ -1,5 +1,6 @@
 ﻿using CommonLib.Consts;
 using CommonLib.Interface;
+using DynamicModel.Core.Common.Extensions;
 using Grpc.Net.Client;
 using LucasNotes.UserApi.Controllers.Dto;
 using LucasNotes.UserService;
@@ -7,6 +8,7 @@ using LucasNotes.UserService.Protos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace LucasNotes.UserApi.Controllers
 {
@@ -16,12 +18,15 @@ namespace LucasNotes.UserApi.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        private const string _userServiceUrl = "https://localhost:7029";
+        //private const string _userServiceUrl = "https://localhost:7029";
         private readonly IConsulService _consulService;
+        private readonly IDistributedCache _distributedCache;
 
-        public UserController(IConsulService consulService)
+        public UserController(IConsulService consulService, 
+            IDistributedCache distributedCache)
         {
             _consulService = consulService;
+            _distributedCache = distributedCache;
         }
 
         [HttpPost]
@@ -37,6 +42,19 @@ namespace LucasNotes.UserApi.Controllers
         [HttpGet]
         public async Task<UserDto> GetUserById(int id)
         {
+            var user = await _distributedCache.GetStringAsync($"user_{id}");
+            if (!string.IsNullOrWhiteSpace(user))
+            {
+                var result = user.ToObject<UserCache>();
+                return new UserDto
+                {
+                    Email = result.Email,
+                    UserId = result.UserId,
+                    Gender = result.Gender,
+                    UserName = result.UserName
+                };
+            }
+
             using (var channel = GrpcChannel.ForAddress(await _consulService.GetUrlFromServiceNameAsync(ServiceNames.UserService)))
             {
                 var client = new UserManager.UserManagerClient(channel);

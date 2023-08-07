@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Provider.Consul;
+using Ocelot.Provider.Polly;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,15 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 var config = builder.Configuration;
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddOcelot();
+//builder.Services.AddControllers();
+//// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+//builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddSwaggerGen();
+
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
+}).AddJwtBearer("Bearer", options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -31,21 +34,23 @@ builder.Services.AddAuthentication(options =>
         RequireExpirationTime = true,
     };
 });
+var ocelotConfig = new ConfigurationBuilder().AddJsonFile("configuration.json").Build();
+builder.Services.AddOcelot(ocelotConfig).AddConsul().AddPolly();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//// Configure the HTTP request pipeline.
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
-app.UseAuthentication();
-app.UseAuthorization();
-app.UseOcelot().Wait();
-app.MapControllers();
+//app.UseAuthentication();
+//app.UseAuthorization();
+app.UseAuthentication().UseOcelot().Wait();
+//app.MapControllers();
 
 app.Run();
