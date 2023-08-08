@@ -1,4 +1,5 @@
 ﻿using CommonLib;
+using CommonLib.Helper;
 using LucasNotes.UserService.Protos;
 using LucasNotes.UserService.Repositories.Interfaces;
 using System.Data;

@@ -1,0 +1,25 @@
+# Choose ubuntu version
+FROM mcr.microsoft.com/mssql/server:latest
+
+# Create app directory
+WORKDIR /app
+
+# Copy initialization scripts
+COPY . /app
+             
+# Set environment variables, not have to write them with the docker run command
+# Note: make sure that your password matches what is in the run-initialization script 
+ENV SA_PASSWORD=xA123456
+ENV ACCEPT_EULA=Y
+
+# Expose port 1433 in case accessing from other container
+# Expose port externally from docker-compose.yml
+EXPOSE 1433
+
+# Run Microsoft SQL Server and initialization script (at the same time)
+# RUN chmod +x ./user_entrypoint.sh
+# CMD /bin/bash ./user_entrypoint.sh
+RUN ( /opt/mssql/bin/sqlservr & ) \
+    | grep -q "Service Broker manager has started" \
+    && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P $SA_PASSWORD -i note_v1.sql \
+    && pkill sqlservr

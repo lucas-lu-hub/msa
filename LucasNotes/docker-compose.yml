@@ -5,119 +5,170 @@ services:
     image: "consul:1.15"
     container_name: "consul"
     ports:
-     - "8500:8500"
+      - "8500:8500"
 
   cache:
     image: "redis"
     container_name: "cache"
     ports:
-     - "6379:6379"
+      - "6379:6379"
     command:
-     - redis-server --save 30 1 --loglevel warning -- requirepass xA123456
+      - redis-server --save 30 1 --loglevel warning -- requirepass xA123456
 
-  sqlserver:
+  userdb:
     build: 
-     context: "./Database/"
-     dockerfile: "./UserDockerfile"
+      context: "./Database/UserDb/"
+      dockerfile: "./UserDockerfile"
     image: "mysqlserver"
-    container_name: "sqlserver"
+    container_name: "userdb"
     ports:
-     - "1600:1433"
+      - "1600:1433"
     environment:
-     - "ACCEPT_EULA=Y"
-     - "SA_PASSWORD=xA123456"
+      - "ACCEPT_EULA=Y"
+      - "SA_PASSWORD=xA123456"
+
+  notedb:
+    build: 
+      context: "./Database/NoteDb/"
+      dockerfile: "./UserDockerfile"
+    image: "mysqlserver"
+    container_name: "notedb"
+    ports:
+      - "1700:1433"
+    environment:
+      - "ACCEPT_EULA=Y"
+      - "SA_PASSWORD=xA123456"
+
+  noteservice:
+    build: 
+      context: "."
+      dockerfile: "./LucasNotes.NoteService/Dockerfile"
+    image: "mynoteservice"
+    container_name: "noteservice"
+    ports:
+      - "9000:80"
+    depends_on:
+      - "consul"
+      - "notedb"
+    environment:
+      - "ip=noteservice"
+      - "port=80"
+      - "dbAddress=notedb"
+      - "dbPwd=xA123456"
+      - "dbName=LucasNotes.NoteDb"
+      - "ConsulAddress=http://consul:8500"
 
   userservice:
     build: 
-     context: "."
-     dockerfile: "./LucasNotes.UserService/Dockerfile"
+      context: "."
+      dockerfile: "./LucasNotes.UserService/Dockerfile"
     image: "myuserserivce"
     container_name: "userservice"
     ports:
-     - "7000:80"
+      - "7000:80"
     depends_on:
-     - "consul"
-     - "sqlserver"
+      - "consul"
+      - "userdb"
     environment:
-     - "ip=userservice"
-     - "port=80"
-     - "dbAddress=sqlserver"
-     - "dbPwd=xA123456"
-     - "ConsulAddress=http://consul:8500"
+      - "ip=userservice"
+      - "port=80"
+      - "dbAddress=userdb"
+      - "dbPwd=xA123456"
+      - "dbName=LucasNotes.UserDb"
+      - "ConsulAddress=http://consul:8500"
+
+  noteapi:
+    build:
+      context: "."
+      dockerfile: "./LucasNotes.NoteService/Dockerfile"
+    image: "mynoteapi"
+    container_name: "noteapi"
+    ports:
+      - "10000:80"
+    depends_on:
+      - "consul"
+      - "noteservice"
+    environment:
+      - "ip=noteapi"
+      - "port=80"
+      - "ConsulAddress=http://consul:8500"
+      - "RedisAddress=cache"
+      - "RedisPwd=xA123456"
 
   identity1:
     build: 
-     context: "."
-     dockerfile: "./LucasNotes.Identity/Dockerfile"
+      context: "."
+      dockerfile: "./LucasNotes.Identity/Dockerfile"
     image: "myidentity"
     container_name: "identity1"
     ports:
-     - "5000:80"
+      - "5000:80"
     depends_on:
-     - "consul"
-     - "userservice"
+      - "consul"
+      - "userservice"
     environment:
-     - "ip=identity1"
-     - "port=80"
-     - "ConsulAddress=http://consul:8500"
+      - "ip=identity1"
+      - "port=80"
+      - "ConsulAddress=http://consul:8500"
 
   identity2:
     image: "myidentity"
     container_name: "identity2"
     ports:
-     - "5001:80"
+      - "5001:80"
     depends_on:
-     - "consul"
-     - "userservice"
-     - "identity1"
+      - "consul"
+      - "userservice"
+      - "identity1"
     environment:
-     - "ip=identity2"
-     - "port=80"
-     - "ConsulAddress=http://consul:8500"
+      - "ip=identity2"
+      - "port=80"
+      - "ConsulAddress=http://consul:8500"
 
   identity3:
     image: "myidentity"
     container_name: "identity3"
     ports:
-     - "5003:80"
+      - "5003:80"
     depends_on:
-     - "consul"
-     - "userservice"
-     - "identity1"
+      - "consul"
+      - "userservice"
+      - "identity1"
     environment:
-     - "ip=identity3"
-     - "port=80"
-     - "ConsulAddress=http://consul:8500"
+      - "ip=identity3"
+      - "port=80"
+      - "ConsulAddress=http://consul:8500"
 
   userapi:
     build: 
-     context: "."
-     dockerfile: "./LucasNotes.UserApi/Dockerfile"
+      context: "."
+      dockerfile: "./LucasNotes.UserApi/Dockerfile"
     image: "myuserapi"
     container_name: "userapi"
     ports:
-     - "6000:80"
+      - "6000:80"
     depends_on:
-     - "consul"
-     - "userservice"
+      - "consul"
+      - "userservice"
     environment:
-     - "ip=userapi"
-     - "port=80"
-     - "ConsulAddress=http://consul:8500"
-     - "RedisAddress=cache"
-     - "RedisPwd=xA123456"
+      - "ip=userapi"
+      - "port=80"
+      - "ConsulAddress=http://consul:8500"
+      - "RedisAddress=cache"
+      - "RedisPwd=xA123456"
 
   gateway:
     build:
-     context: "."
-     dockerfile: "./LucasNotes.Gateway/Dockerfile"
+      context: "."
+      dockerfile: "./LucasNotes.Gateway/Dockerfile"
     image: "mygateway"
     container_name: "gateway"
     ports:
-     - "8000:80"
+      - "8000:80"
     depends_on:
-     - "consul"
-     - "userapi"
-     - "identity1"
-     - "identity2"
-     - "identity3"
+      - "consul"
+      - "userapi"
+      - "identity1"
+      - "identity2"
+      - "identity3"
+      - "noteapi"

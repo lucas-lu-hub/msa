@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+option csharp_namespace = "LucasNotes.NoteService.Protos";
+
+package NoteManager;
+
+message NoteDto {
+	int32 Id = 1;
+	string Name = 2;
+	int32 FolerId = 3;
+	string Content = 4;
+	string Tag = 5;
+}
+
+message GetNotesReply {
+	repeated NoteDto Notes = 1;
+}
+
+message GetNoteByIdRequest {
+	repeated NoteDto Notes = 1;
+}
+
+message SuccessMsg {
+	bool Success = 1;
+}
+
+message UpdateNotesRequest {
+	repeated NoteDto Notes = 1;
+}
+
+message DeleteNotesRequest {
+	repeated int32 Notes = 1;
+}
+
+message AddNoteRequest {
+	int32 UserId = 1;
+	NoteDto Note = 2;
+}
+
+service NoteManager {
+	rpc GetNotes (google.protobuf.Empty) returns (GetNotesReply);
+	rpc GetNoteById (GetNoteByIdRequest) returns (NoteDto);
+	rpc UpdateNote (NoteDto) returns (SuccessMsg);
+	rpc UpdateNotes (UpdateNotesRequest) returns (SuccessMsg);
+	rpc DeleteNotes (DeleteNotesRequest) returns (SuccessMsg);
+	rpc AddNote (AddNoteRequest) returns (SuccessMsg);
+}
+

@@ -9,9 +9,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LucasNotes.UserApi", "Lucas
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LucasNotes.UserService", "LucasNotes.UserService\LucasNotes.UserService.csproj", "{7902A435-A1FF-4D87-806B-A87923DF84F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLib", "CommonLib\CommonLib.csproj", "{EE5A5756-E8E2-4CD7-A843-3035654546B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonLib", "CommonLib\CommonLib.csproj", "{EE5A5756-E8E2-4CD7-A843-3035654546B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LucasNotes.Gateway", "LucasNotes.Gateway\LucasNotes.Gateway.csproj", "{3A2A2F13-57EF-401A-AF16-A4BB814DBA28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LucasNotes.Gateway", "LucasNotes.Gateway\LucasNotes.Gateway.csproj", "{3A2A2F13-57EF-401A-AF16-A4BB814DBA28}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{249E5B72-9FB4-46E3-9B46-79C828A84A36}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LucasNotes.NoteApi", "LucasNotes.NoteApi\LucasNotes.NoteApi.csproj", "{9B235B75-8543-406E-9433-7ABAC45D5D96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LucasNotes.NoteService", "LucasNotes.NoteService\LucasNotes.NoteService.csproj", "{2F9EFA11-A9D4-4A53-9057-E339E2BA2DAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +49,14 @@ Global
 		{3A2A2F13-57EF-401A-AF16-A4BB814DBA28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A2A2F13-57EF-401A-AF16-A4BB814DBA28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A2A2F13-57EF-401A-AF16-A4BB814DBA28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B235B75-8543-406E-9433-7ABAC45D5D96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B235B75-8543-406E-9433-7ABAC45D5D96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B235B75-8543-406E-9433-7ABAC45D5D96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B235B75-8543-406E-9433-7ABAC45D5D96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F9EFA11-A9D4-4A53-9057-E339E2BA2DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F9EFA11-A9D4-4A53-9057-E339E2BA2DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F9EFA11-A9D4-4A53-9057-E339E2BA2DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F9EFA11-A9D4-4A53-9057-E339E2BA2DAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

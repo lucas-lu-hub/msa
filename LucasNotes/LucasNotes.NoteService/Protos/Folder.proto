@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "LucasNotes.NoteService.Protos";
+
+package FolderManager;
+
+service FolderManager {
+	rpc 
+}
