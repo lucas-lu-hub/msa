@@ -51,6 +51,22 @@
         "PeriodTimespan": 5,
         "Limit": 5
       }
+    },
+    // noteApi
+    {
+      "DownstreamPathTemplate": "/{url}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/Notes/{url}",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "ServiceName": "NoteApi",
+      "UseServiceDiscovery": true,
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     }
   ],
   "GlobalConfiguration": {

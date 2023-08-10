@@ -19,7 +19,7 @@ services:
     build: 
       context: "./Database/UserDb/"
       dockerfile: "./UserDockerfile"
-    image: "mysqlserver"
+    image: "myuserdb"
     container_name: "userdb"
     ports:
       - "1600:1433"
@@ -30,8 +30,8 @@ services:
   notedb:
     build: 
       context: "./Database/NoteDb/"
-      dockerfile: "./UserDockerfile"
-    image: "mysqlserver"
+      dockerfile: "./NoteDockerfile"
+    image: "mynotedb"
     container_name: "notedb"
     ports:
       - "1700:1433"
@@ -80,7 +80,7 @@ services:
   noteapi:
     build:
       context: "."
-      dockerfile: "./LucasNotes.NoteService/Dockerfile"
+      dockerfile: "./LucasNotes.NoteApi/Dockerfile"
     image: "mynoteapi"
     container_name: "noteapi"
     ports:
@@ -172,3 +172,4 @@ services:
       - "identity2"
       - "identity3"
       - "noteapi"
+      - "noteservice"

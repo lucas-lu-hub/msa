@@ -1,40 +1,63 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
-using LucasNotes.NoteService.Protos;
+using LucasNotes.NoteService.Protos.Note;
+using LucasNotes.NoteService.Repositories.Interface;
 using Microsoft.AspNetCore.Identity;
 
 namespace LucasNotes.NoteService.Services
 {
     public class NoteService : NoteManager.NoteManagerBase
     {
-        public override Task<SuccessMsg> AddNote(AddNoteRequest request, ServerCallContext context)
+        private readonly INoteRepository _noteRepository;
+
+        public NoteService(INoteRepository noteRepository)
         {
-            return base.AddNote(request, context);
+            _noteRepository = noteRepository;
         }
 
-        public override Task<SuccessMsg> DeleteNotes(DeleteNotesRequest request, ServerCallContext context)
+        public override async Task<SuccessMsg> AddNote(AddNoteRequest request, ServerCallContext context)
         {
-            return base.DeleteNotes(request, context);
+            return new SuccessMsg()
+            {
+                Success = await _noteRepository.AddNoteAsync(request)
+            };
         }
 
-        public override Task<NoteDto> GetNoteById(GetNoteByIdRequest request, ServerCallContext context)
+        public override async Task<SuccessMsg> DeleteNotes(DeleteNotesRequest request, ServerCallContext context)
         {
-            return base.GetNoteById(request, context);
+            return new SuccessMsg()
+            {
+                Success = await _noteRepository.DeleteNotesAsync(request.Ids.ToList())
+            };
         }
 
-        public override Task<GetNotesReply> GetNotes(Empty request, ServerCallContext context)
+        public override async Task<NoteDto> GetNoteById(GetNoteByIdRequest request, ServerCallContext context)
         {
-            return base.GetNotes(request, context);
+            return await _noteRepository.GetNoteByIdAsync(request.Id);
         }
 
-        public override Task<SuccessMsg> UpdateNote(NoteDto request, ServerCallContext context)
+        public override async Task<GetNotesReply> GetNotes(Empty request, ServerCallContext context)
         {
-            return base.UpdateNote(request, context);
+            var result = new GetNotesReply();
+            var Notes = await _noteRepository.GetNotesAsync(null);
+            result.Notes.AddRange(Notes);
+            return result;
         }
 
-        public override Task<SuccessMsg> UpdateNotes(UpdateNotesRequest request, ServerCallContext context)
+        public override async Task<SuccessMsg> UpdateNote(NoteDto request, ServerCallContext context)
         {
-            return base.UpdateNotes(request, context);
+            return new SuccessMsg
+            {
+                Success = await _noteRepository.UpdateNoteAsync(request)
+            };
+        }
+
+        public override async Task<SuccessMsg> UpdateNotes(UpdateNotesRequest request, ServerCallContext context)
+        {
+            return new SuccessMsg()
+            {
+                Success = await _noteRepository.UpdateNotesAsync(request.Notes.ToList())
+            };
         }
     }
 }

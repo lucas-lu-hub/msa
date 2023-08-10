@@ -21,5 +21,5 @@ EXPOSE 1433
 # CMD /bin/bash ./user_entrypoint.sh
 RUN ( /opt/mssql/bin/sqlservr & ) \
     | grep -q "Service Broker manager has started" \
-    && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P $SA_PASSWORD -i user_v1.sql \
+    && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P $SA_PASSWORD -i note_v1.sql \
     && pkill sqlservr

@@ -31,6 +31,7 @@ BEGIN
 		[Id] [int] IDENTITY(1,1) NOT NULL,
 		[Name] [nvarchar](50) NOT NULL,
 		[ParentId] [int] NULL,
+		[UserId] [int] NOT NULL,
 	CONSTRAINT [PK_Folder] PRIMARY KEY CLUSTERED 
 	(
 		[Id] ASC

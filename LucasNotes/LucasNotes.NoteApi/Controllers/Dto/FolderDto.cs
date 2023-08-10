@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int ParentId { get; set; }
-        public List<FolderDto> Children { get; set; }
+        public int? ParentId { get; set; }
+        public List<FolderDto> Children { get; set; } = new();
     }
 }

@@ -44,7 +44,7 @@ namespace LucasNotes.Identity.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name, user.UserName),
-                new Claim("UserId", user.UserId.ToString()),
+                new Claim(ClaimTypes.Sid, user.UserId.ToString()),
                 new Claim(ClaimTypes.Role, "roleName"),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Expired, DateTime.Now.AddYears(2).ToLongTimeString()),
