@@ -15,7 +15,6 @@ namespace LucasNotes.UserApi.Controllers
 
     [ApiController]
     [Route("[controller]/[action]")]
-    [Authorize]
     public class UserController : Controller
     {
         //private const string _userServiceUrl = "https://localhost:7029";
@@ -39,6 +38,7 @@ namespace LucasNotes.UserApi.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<UserDto> GetUserById(int id)
         {
@@ -66,6 +66,7 @@ namespace LucasNotes.UserApi.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<List<UserDto>> GetUsers()
         {
