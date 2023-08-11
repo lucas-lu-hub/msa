@@ -10,25 +10,50 @@ const ViewType = {
 
 export const Login = () => {
   const navigate = useNavigate();
-  const [type, setType] = useState(ViewType.Login);
+  const [state, setState] = useState({
+    type: ViewType.Login,
+    userName: '',
+    password: ''
+  });
 
-  const requestData = async () => {
-    const ret = await fetch("https://localhost:7189/WeatherForecast", {
-      // method: "GET",
-      // headers: {
-      //   Accept: "application/json",
-      //   "Content-Type": "application/json",
-      // },
+  const getToken = async (state: any) => {
+    const ret = await fetch("https://localhost:8000/Identities/account/login", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(state)
     });
-
     await ret.json().then((r) => {
       console.log(r);
+      window.localStorage.setItem("lucasNote.Token", r);
       navigate("/note");
     });
   };
 
+  const regist = async (state: any) => {
+    const ret = await fetch("https://localhost:8000/Users/user/Add", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({...state, userId: 0, gender: 1, email: ''})
+    });
+  }
+
   const changType = (t: number) => {
-    setType(t);
+    setState({...state, type: t});
+  }
+
+  const setName = (n: string) => {
+    setState({...state, userName: n});
+  }
+
+  
+  const setPwd = (p: string) => {
+    setState({...state, password: p});
   }
 
   return (
@@ -36,17 +61,20 @@ export const Login = () => {
       <div className={"p-4 w-80 h-80 m-auto mt-52 border-2 bg-[#dedeee3f]"}>
         <div className={styles.AltHei}></div>
         <div className={styles.AltHei}></div>
-        <Input type="text" placeholder="用户名"></Input>
+        <Input type="text" placeholder="用户名" onChange={(e) => setName(e.target.value.trim())}></Input>
         <div className={styles.AltHei}></div>
-        <Input type="password" placeholder="密码："></Input>
+        <Input type="password" placeholder="密码" onChange={(e) => setPwd(e.target.value.trim())}></Input>
         <div className={styles.AltHei}></div>
         <div className={styles.AltHei}></div>
         <div className={styles.AltHei}></div>
         <Button className="ml-10" 
-          onChange={() => changType(type)}>
-          {type == ViewType.Login ? '去注册' : ''}
+          onClick={() => changType(state.type === ViewType.Login ? ViewType.Regist : ViewType.Login)}
+        >
+          {state.type == ViewType.Login ? '去注册' : '去登陆'}
         </Button>
-        <Button className="ml-10" onClick={requestData}>登录</Button>
+        <Button className="ml-10" onClick={ () => {
+          return state.type == ViewType.Login ? getToken(state) : regist(state);
+        }}>{state.type === ViewType.Login ? '登录' : '注册'}</Button>
       </div>
     </div>
   );

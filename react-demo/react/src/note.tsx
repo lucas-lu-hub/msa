@@ -1,4 +1,5 @@
 import { Button, Modal } from "antd";
+import MenuItem from "antd/es/menu/MenuItem";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./main.module.scss";
@@ -6,20 +7,6 @@ import styles from "./main.module.scss";
 export const Note = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-
-  const requestData = async () => {
-    const ret = await fetch("https://localhost:7189/WeatherForecast", {
-      // method: "GET",
-      // headers: {
-      //   Accept: "application/json",
-      //   "Content-Type": "application/json",
-      // },
-    });
-
-    await ret.json().then((r) => {
-      console.log(r);
-    });
-  };
 
   return (
     <div className={styles.main}>
