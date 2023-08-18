@@ -42,18 +42,18 @@ namespace LucasNotes.UserApi.Controllers
         [HttpGet]
         public async Task<UserDto> GetUserById(int id)
         {
-            var user = await _distributedCache.GetStringAsync($"user_{id}");
-            if (!string.IsNullOrWhiteSpace(user))
-            {
-                var result = user.ToObject<UserCache>();
-                return new UserDto
-                {
-                    Email = result.Email,
-                    UserId = result.UserId,
-                    Gender = result.Gender,
-                    UserName = result.UserName
-                };
-            }
+            //var user = await _distributedCache.GetStringAsync($"user_{id}");
+            //if (!string.IsNullOrWhiteSpace(user))
+            //{
+            //    var result = user.ToObject<UserCache>();
+            //    return new UserDto
+            //    {
+            //        Email = result.Email,
+            //        UserId = result.UserId,
+            //        Gender = result.Gender,
+            //        UserName = result.UserName
+            //    };
+            //}
 
             using (var channel = GrpcChannel.ForAddress(await _consulService.GetUrlFromServiceNameAsync(ServiceNames.UserService)))
             {
