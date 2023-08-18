@@ -16,7 +16,7 @@ export const Login = () => {
     password: ''
   });
 
-  const getToken = async (state: any) => {
+  const getToken = async (state: { type: number; userName: string; password: string; }) => {
     const ret = await fetch("https://localhost:8000/Identities/account/login", {
       method: "POST",
       headers: {
@@ -32,8 +32,8 @@ export const Login = () => {
     });
   };
 
-  const regist = async (state: any) => {
-    const ret = await fetch("https://localhost:8000/Users/user/Add", {
+  const regist = async (state: { type: number; userName: string; password: string; }) => {
+    await fetch("https://localhost:8000/Users/user/Add", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -41,6 +41,7 @@ export const Login = () => {
       },
       body: JSON.stringify({...state, userId: 0, gender: 1, email: ''})
     });
+
   }
 
   const changType = (t: number) => {
