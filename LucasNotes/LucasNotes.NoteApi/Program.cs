@@ -57,12 +57,20 @@ builder.Services.AddAuthentication(options =>
         RequireExpirationTime = true,
     };
 });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("all", policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwagger();
+app.UseSwaggerUI();
 
+app.UseCors("all");
 app.UseConul(config);
 app.UseHttpsRedirection();
 

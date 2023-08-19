@@ -20,3 +20,6 @@ BEGIN
 	) ON [PRIMARY]
 END
 GO
+
+INSERT INTO [dbo].[User](Name, Pwd, Email, Gender) VALUES('admin', '$2b$10$CgQQr5DpMZMp199JT5FnIepwW9cgEs4HwS1WJdvQdM6wFmL/EAns2', '271298011@qq.com', 1)
+GO

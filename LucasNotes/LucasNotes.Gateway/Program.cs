@@ -37,8 +37,17 @@ builder.Services.AddAuthentication(options =>
 var ocelotConfig = new ConfigurationBuilder().AddJsonFile("configuration.json").Build();
 builder.Services.AddOcelot(ocelotConfig).AddConsul().AddPolly();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("myCors", policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
+app.UseCors("myCors");
 //// Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{

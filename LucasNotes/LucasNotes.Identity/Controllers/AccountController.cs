@@ -3,10 +3,8 @@ using CommonLib.Interface;
 using Grpc.Net.Client;
 using LucasNotes.Identity.Controllers.Dto;
 using LucasNotes.UserService.Protos;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Net.Http.Headers;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -74,10 +72,20 @@ namespace LucasNotes.Identity.Controllers
             {
                 var client = new UserManager.UserManagerClient(channel);
                 return await client.CheckUserPwdAsync(new CheckUserPwdRequest
-                 {
-                     Name = name,
-                     Pwd = pwd
-                 });
+                {
+                    Name = name,
+                    Pwd = pwd
+                });
+            }
+        }
+
+        [HttpPost]
+        public async Task Add(UserDto input)
+        {
+            using (var channel = GrpcChannel.ForAddress(await _consulService.GetUrlFromServiceNameAsync(ServiceNames.UserService)))
+            {
+                var client = new UserManager.UserManagerClient(channel);
+                await client.CreateUserAsync(input);
             }
         }
     }

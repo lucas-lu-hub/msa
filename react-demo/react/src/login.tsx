@@ -2,6 +2,7 @@ import { Button, Input } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./main.module.scss";
+import getHeaders from "./rtks/serviceApiHelper";
 
 const ViewType = {
   Login: 1,
@@ -17,12 +18,9 @@ export const Login = () => {
   });
 
   const getToken = async (state: { type: number; userName: string; password: string; }) => {
-    const ret = await fetch("https://localhost:8000/Identities/account/login", {
+    const ret = await fetch("http://localhost:8000/Identities/account/login", {
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
+      headers: getHeaders(),
       body: JSON.stringify(state)
     });
     await ret.json().then((r) => {
@@ -33,12 +31,9 @@ export const Login = () => {
   };
 
   const regist = async (state: { type: number; userName: string; password: string; }) => {
-    await fetch("https://localhost:8000/Users/user/Add", {
+    await fetch("http://localhost:8000/Identities/account/Add", {
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
+      headers: getHeaders(),
       body: JSON.stringify({...state, userId: 0, gender: 1, email: ''})
     });
 

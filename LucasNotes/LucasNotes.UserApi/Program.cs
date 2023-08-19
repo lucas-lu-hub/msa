@@ -1,6 +1,4 @@
 using CommonLib;
-using CommonLib.Imp;
-using CommonLib.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -43,6 +41,14 @@ builder.Services.AddSwaggerGen(opt =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("all", policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 builder.Services.AddStackExchangeRedisCache(option =>
 {
     option.Configuration = $"{config["RedisAddress"]}:6379,password={config["RedisPwd"]}";
@@ -74,7 +80,7 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-
+app.UseCors("all");
 app.UseConul(config);
 app.UseHttpsRedirection();
 

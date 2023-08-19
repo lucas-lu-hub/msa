@@ -2,7 +2,6 @@
 using CommonLib.Helper;
 using LucasNotes.UserService.Protos;
 using LucasNotes.UserService.Repositories.Interfaces;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace LucasNotes.UserService.Repositories
@@ -45,7 +44,7 @@ namespace LucasNotes.UserService.Repositories
             {
                 UserId = -1
             };
-        } 
+        }
 
         public async Task<bool> CreateUserAsync(UserDto user)
         {
@@ -75,14 +74,18 @@ namespace LucasNotes.UserService.Repositories
                       "[Email]," +
                       "[Gender] " +
                       "FROM [dbo].[User] " +
-                      "WHERE [Name] = @Name AND [Pwd] = @Pwd";
+                      "WHERE [Name] = @Name ";  //AND [Pwd] = @Pwd";
             var parameters = new SqlParameter[]
             {
                 new SqlParameter("@Name", name),
-                new SqlParameter("@Pwd", pwd),
+                //new SqlParameter("@Pwd", pwd),
             };
             var result = await _dbHelper.Query<UserDto>(sql, parameters);
-            return result.FirstOrDefault() ?? new UserDto
+            if (BCrypt.Net.BCrypt.Verify(pwd, result.FirstOrDefault()?.Password))
+            {
+                return result.FirstOrDefault();
+            }
+            return new UserDto
             {
                 UserId = -1
             };

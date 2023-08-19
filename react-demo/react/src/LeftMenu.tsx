@@ -4,7 +4,7 @@ import type { DataNode, DirectoryTreeProps } from 'antd/es/tree';
 
 const { DirectoryTree } = Tree;
 
-const treeData: DataNode[] = [
+const treeData1: DataNode[] = [
   {
     title: 'parent 0',
     key: '0-0',
@@ -48,8 +48,9 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://api.example.com/data');
+        const response = await fetch('localhost:8000/notes/folder/getFolders');
         const jsonData = await response.json();
+        debugger;
         setData(mapList(jsonData));
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -66,7 +67,7 @@ const App: React.FC = () => {
       defaultExpandAll
       onSelect={onSelect}
       onExpand={onExpand}
-      treeData={data}
+      treeData={treeData1}
     />
   );
 };

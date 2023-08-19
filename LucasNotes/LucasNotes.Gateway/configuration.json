@@ -12,10 +12,10 @@
       "UpstreamPathTemplate": "/Identities/{url}",
       "UpstreamHttpMethod": [ "Get", "Post" ],
       "ReRoutesCaseSensitive": false,
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
       "QoSOptions": { //Qos相关配置
         "ExceptionsAllowedBeforeBreaking": 5,
         "DurationOfBreak": 5000,
