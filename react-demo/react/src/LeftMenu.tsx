@@ -1,31 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Tree } from 'antd';
+import { Button, Input, Modal, Tree } from 'antd';
 import type { DataNode, DirectoryTreeProps } from 'antd/es/tree';
+import getHeaders from './rtks/serviceApiHelper';
 
 const { DirectoryTree } = Tree;
 
-const treeData1: DataNode[] = [
-  {
-    title: 'parent 0',
-    key: '0-0',
-    children: [
-      { title: 'leaf 0-0', key: '0-0-0', isLeaf: true },
-      { title: 'leaf 0-1', key: '0-0-1', isLeaf: true },
-    ],
-  },
-  {
-    title: 'parent 1',
-    key: '0-1',
-    children: [
-      { title: 'leaf 1-0', key: '0-1-0', isLeaf: true },
-      { title: 'leaf 1-1', key: '0-1-1', isLeaf: true },
-    ],
-  },
-];
+interface Props {
+  onSelectChange: (id:number) => void,
+  // data: DataNode[]
+}
 
-const App: React.FC = () => {
+const App = (props : Props):JSX.Element => {
+
   const onSelect: DirectoryTreeProps['onSelect'] = (keys, info) => {
     console.log('Trigger Select', keys, info);
+    setSelectedFolder(keys[0]);
+    props.onSelectChange(keys[0])
   };
 
   const onExpand: DirectoryTreeProps['onExpand'] = (keys, info) => {
@@ -33,6 +23,51 @@ const App: React.FC = () => {
   };
 
   
+  const [selectedFolder, setSelectedFolder] = useState(-1);
+
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const [createName, setCreateName] = useState("");
+  const handleCreateOK = async() => {
+    await createFolder(createName, selectedFolder)
+    fetchData();
+    setShowCreateModal(false);
+    setCreateName("");
+  }
+  const handleCreateCancel = () => {
+    setShowCreateModal(false);
+    setCreateName("");
+  }
+
+  const handleDeleteCancel = () => {
+    setShowDeleteModal(false);
+  }
+
+  const handleDeleteOK = async() => {
+    await deleteFolder(selectedFolder);
+    fetchData();
+    setShowDeleteModal(false);
+  }
+
+  const createFolder = async (createName:string, selectedFolder:number) => {
+    await fetch("http://localhost:8000/Notes/folder/AddFolder", {
+      method: "POST",
+      headers: getHeaders(),
+      body: JSON.stringify({
+        name: createName,
+        parentId: selectedFolder,
+      })
+    });
+  };
+
+  const deleteFolder = async (id:number) => {
+    await fetch(`http://localhost:8000/Notes/folder/deleteFolder?id=${id}`, {
+      method: "DELETE",
+      headers: getHeaders()
+    });
+  };
+
   const mapList: DataNode[] = (items: any[]) => {
     return items.map(item => {
       return {
@@ -44,31 +79,58 @@ const App: React.FC = () => {
   };
 
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/notes/folder/getFolders', {
+        method: "GET",
+        headers: getHeaders(),
+      });
+      const jsonData = await response.json();
+      setData(mapList(jsonData));
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('localhost:8000/notes/folder/getFolders');
-        const jsonData = await response.json();
-        debugger;
-        setData(mapList(jsonData));
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
     fetchData();
   }, []);
 
-
   return (
-    <DirectoryTree
-      multiple
-      defaultExpandAll
-      onSelect={onSelect}
-      onExpand={onExpand}
-      treeData={treeData1}
-    />
+    <div>
+      <DirectoryTree
+        defaultExpandAll
+        onSelect={onSelect}
+        onExpand={onExpand}
+        treeData={data}
+      />
+      
+      <Button 
+          onClick={() => setShowDeleteModal(true)}
+        >删除</Button>
+        <Button
+          onClick={ () => setShowCreateModal(true)}
+        >创建</Button>
+
+        
+      <Modal
+        title="创建文件夹"
+        open={showCreateModal}
+        onOk={handleCreateOK}
+        onCancel={handleCreateCancel}  
+      >
+        <label>文件夹名</label>
+        <Input value={createName} onChange={(e) => setCreateName(e.target.value)}></Input>
+      </Modal>
+      <Modal
+        title="删除文件夹"
+        open={showDeleteModal}
+        onOk={handleDeleteOK}
+        onCancel={handleDeleteCancel}  
+      >
+        <label></label>
+      </Modal>
+    </div>
   );
 };
 

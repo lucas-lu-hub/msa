@@ -11,7 +11,7 @@ headers.append('Accept', '*/*');
 headers.append('Accept-Encoding', 'gzip, deflate, br');
 headers.append('Connection', 'keep-alive');
 
-var token = window.localStorage.getItem("lucasNote.Token");
+const token = window.localStorage.getItem("lucasNote.Token");
 headers.append('Authorization', 'Bearer ' + token);
 return headers;
 }

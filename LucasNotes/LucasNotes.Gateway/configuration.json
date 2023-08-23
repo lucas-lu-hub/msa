@@ -10,7 +10,7 @@
         "Type": "RoundRobin"
       },
       "UpstreamPathTemplate": "/Identities/{url}",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "ReRoutesCaseSensitive": false,
       //"AuthenticationOptions": {
       //  "AuthenticationProviderKey": "Bearer",
@@ -34,7 +34,7 @@
       "DownstreamPathTemplate": "/{url}",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/Users/{url}",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "ServiceName": "UserApi",
       "UseServiceDiscovery": true,
       "LoadBalancerOptions": {
@@ -57,7 +57,7 @@
       "DownstreamPathTemplate": "/{url}",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/Notes/{url}",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "ServiceName": "NoteApi",
       "UseServiceDiscovery": true,
       "LoadBalancerOptions": {

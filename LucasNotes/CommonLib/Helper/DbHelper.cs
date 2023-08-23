@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using DynamicModel.Core.Common.Extensions;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -52,7 +53,10 @@ namespace CommonLib.Helper
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception($"Method:GetDataSet, DateTime:{DateTime.Now}, ConnectString:{connectionString},sql:{sql}"); ;
+                        throw new Exception($"Method:GetDataSet, DateTime:{DateTime.Now}, ConnectString:{connectionString}, \r\n" +
+                            $"sql:{sql}, \r\n " +
+                            $"parameters:{string.Join("、", paramArray?.Select(item => item.Value?.ToString()) ?? new List<string>())}",
+                            ex); ;
                     }
                     finally
                     {
@@ -82,7 +86,8 @@ namespace CommonLib.Helper
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception($"Method:GetDataSet, DateTime:{DateTime.Now}");
+                        throw new Exception($"Method:GetDataSet, sql:{sql}, \r\n parameters:{string.Join("、", parameters?.Select(item => item.Value?.ToString()) ?? new List<string>())}",
+                            ex);
                     }
                     finally
                     {

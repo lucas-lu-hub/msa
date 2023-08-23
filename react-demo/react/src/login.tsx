@@ -23,11 +23,10 @@ export const Login = () => {
       headers: getHeaders(),
       body: JSON.stringify(state)
     });
-    await ret.json().then((r) => {
-      console.log(r);
-      window.localStorage.setItem("lucasNote.Token", r);
-      navigate("/note");
-    });
+    const data = await ret.text();
+    
+    localStorage.setItem("lucasNote.Token", data);
+    navigate("/note");
   };
 
   const regist = async (state: { type: number; userName: string; password: string; }) => {

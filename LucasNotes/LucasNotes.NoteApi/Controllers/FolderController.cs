@@ -35,16 +35,18 @@ namespace LucasNotes.NoteApi.Controllers
                     ParentId = item.ParentId > 0 ? item.ParentId : null,
                     Name = item.Name
                 }).ToList();
+                var root = new List<Dto.FolderDto>();
                 result.ForEach(item =>
                 {
-                    if (!item.ParentId.HasValue)
+                    if (!item.ParentId.HasValue || item.ParentId < 0)
                     {
+                        root.Add(item);
                         return;
                     }
                     var parent = result.FirstOrDefault(f => f.Id == item.ParentId);
                     parent?.Children.Add(item);
                 });
-                return result;
+                return root;
             }
         }
 
@@ -109,7 +111,8 @@ namespace LucasNotes.NoteApi.Controllers
                 {
                     Id = input.Id,
                     Name = input.Name,
-                    ParentId = input.Id,
+                    ParentId = input.ParentId ?? -1,
+                    UserId = userId
                 });
                 return result.Success;
             }

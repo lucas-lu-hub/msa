@@ -1,4 +1,4 @@
 LucasNotes/.vs/
 LucasNotes/*/bin/
 LucasNotes/*/obj/
-.vite
+node_modules
