@@ -64,7 +64,7 @@ namespace LucasNotes.NoteService.Repositories
 
         public async Task<List<NoteDto>> GetNotesAsync(List<int> ids)
         {
-            var sql = "SELECT UserId, FolderId, Name, [Content] " +
+            var sql = "SELECT Id, UserId, FolderId, Name, [Content] " +
                     "FROM [dbo].[Note] ";
 
             if (ids != null && ids.Count > 0)
@@ -73,6 +73,20 @@ namespace LucasNotes.NoteService.Repositories
             }  
 
             var paramArray = new SqlParameter[]{ };
+
+            return await _dbHelper.Query<NoteDto>(sql, paramArray);
+        }
+
+        public async Task<List<NoteDto>> GetNotesByFolderIdAsync(int folderId)
+        {
+            var sql = "SELECT Id, UserId, FolderId, Name, [Content] " +
+                    "FROM [dbo].[Note] WHERE FolderId = @folderId ";
+
+
+            var paramArray = new SqlParameter[]
+            {
+                new SqlParameter("@folderId", folderId)
+            };
 
             return await _dbHelper.Query<NoteDto>(sql, paramArray);
         }

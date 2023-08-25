@@ -23,6 +23,11 @@ message GetNoteByIdRequest {
 	int32 UserId = 2;
 }
 
+message GetNoteByFolderIdRequest {
+	int32 FolderId = 1;
+	int32 UserId = 2;
+}
+
 message SuccessMsg {
 	bool Success = 1;
 }
@@ -49,6 +54,7 @@ message GetNotesRequest {
 service NoteManager {
 	rpc GetNotes (google.protobuf.Empty) returns (GetNotesReply);
 	rpc GetNoteById (GetNoteByIdRequest) returns (NoteDto);
+	rpc GetNoteByFolderId (GetNoteByFolderIdRequest) returns (GetNotesReply);
 	rpc UpdateNote (NoteDto) returns (SuccessMsg);
 	rpc UpdateNotes (UpdateNotesRequest) returns (SuccessMsg);
 	rpc DeleteNotes (DeleteNotesRequest) returns (SuccessMsg);

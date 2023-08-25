@@ -1,5 +1,6 @@
 ﻿using CommonLib.Consts;
 using CommonLib.Interface;
+using Consul;
 using Grpc.Net.Client;
 using LucasNotes.NoteApi.Controllers.Dto;
 using LucasNotes.NoteService.Protos.Note;
@@ -62,10 +63,37 @@ namespace LucasNotes.NoteApi.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<List<Dto.NoteDto>> GetNoteByFolderId(int folderId)
+        {
+            int.TryParse(User.FindFirst("UserId")?.Value, out var userId);
+            using (var channel = GrpcChannel.ForAddress(await _consulService.GetUrlFromServiceNameAsync(ServiceNames.NoteService)))
+            {
+                var client = new NoteManager.NoteManagerClient(channel);
+                var notes = await client.GetNoteByFolderIdAsync(new GetNoteByFolderIdRequest()
+                {
+                    FolderId = folderId,
+                    UserId = userId
+                });
+                return notes.Notes.Select(item => new Dto.NoteDto
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Content = item.Content,
+                    FolderId = item.FolderId,
+                    Tag = item.Tag
+                }).ToList();
+            }
+        }
+
 
         [HttpPost]
         public async Task<bool> UpdateNote(Dto.NoteDto note)
         {
+            if (note.Id <= 0)
+            {
+                return await AddNote(note);
+            }
             int.TryParse(User.FindFirst("UserId")?.Value, out var userId);
             using (var channel = GrpcChannel.ForAddress(await _consulService.GetUrlFromServiceNameAsync(ServiceNames.NoteService)))
             {

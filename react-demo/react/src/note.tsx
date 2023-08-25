@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./main.module.scss";
 import LeftMenu from './LeftMenu';
+import RightContent from "./RightContent";
 
 
 export const Note = () => {
@@ -19,9 +20,10 @@ export const Note = () => {
         />
       </div>
       <div className="right">
-        <div className="header font-bold">header</div>
         <div>
-          
+          <RightContent 
+            SelectFolderId={selectedFolder}
+          />
         </div>
       </div>
     </div>

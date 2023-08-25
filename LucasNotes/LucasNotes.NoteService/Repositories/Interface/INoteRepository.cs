@@ -10,6 +10,7 @@ namespace LucasNotes.NoteService.Repositories.Interface
         Task<bool> DeleteNotesAsync(List<int> ids);
         Task<NoteDto> GetNoteByIdAsync(int id);
         Task<List<NoteDto>> GetNotesAsync(List<int> ids);
+        Task<List<NoteDto>> GetNotesByFolderIdAsync(int folderId);
         Task<bool> UpdateNoteAsync(NoteDto note);
         Task<bool> UpdateNotesAsync(List<NoteDto> notes);
     }

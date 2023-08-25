@@ -44,6 +44,14 @@ namespace LucasNotes.NoteService.Services
             return result;
         }
 
+        public override async Task<GetNotesReply> GetNoteByFolderId(GetNoteByFolderIdRequest request, ServerCallContext context)
+        {
+            var result = new GetNotesReply();
+            var Notes = await _noteRepository.GetNotesByFolderIdAsync(request.FolderId);
+            result.Notes.AddRange(Notes);
+            return result;
+        }
+
         public override async Task<SuccessMsg> UpdateNote(NoteDto request, ServerCallContext context)
         {
             return new SuccessMsg
