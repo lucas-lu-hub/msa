@@ -122,9 +122,9 @@ const RightContent = (props : Props):JSX.Element => {
   }
 
   return (<div>
-    <div>
-      <div className="p-4"></div>
-      {}
+    {props.SelectFolderId > 0 && (<div>
+    <div className="p-4"></div>
+      
       <Button onClick={() => {
         setData([...data, {
           key: -1,
@@ -134,27 +134,27 @@ const RightContent = (props : Props):JSX.Element => {
       }}>
         创建日记
       </Button>
-      <Button onClick={() => setShowDelete(true)}>删除日记</Button>
-      <Tabs 
+      {selectedTabKey !== '-1' && (<Button onClick={() => setShowDelete(true)}>删除日记</Button>)}
+      {selectedTabKey !== '-1' && (<Tabs 
         activeKey={selectedTabKey}
         items={data}
         onChange={onChange}
-      />
-      <Input 
+      />)}
+      {selectedTabKey !== '-1' && (<Input 
         className="" 
         placeholder="再次输入header" 
         value={head} 
         onChange={(e) => {
           setHead(e.target.value);
         }} 
-      />
-      <ReactQuill 
+      />)}
+      {selectedTabKey !== '-1' && (<ReactQuill 
         className="h-[500px]"
         value={content}
         theme="snow"
         onChange={setContent}
-      />
-      <Button onClick={() => {
+      />)}
+      {selectedTabKey !== '-1' && (<Button onClick={() => {
         saveNote(selectedTabKey, head, content, props.SelectFolderId);
         const data = fetchNotes(props.SelectFolderId);
         data.then((d) => {      
@@ -166,8 +166,8 @@ const RightContent = (props : Props):JSX.Element => {
         })
         setData(aaa);
         })
-      }}>保存</Button>
-    </div>
+      }}>保存</Button>)}
+    </div>)}
     <Modal
       title="删除文件夹"
       open={showDelete}
